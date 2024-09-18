@@ -22,7 +22,7 @@ LIBEDGETPU_CFLAGS := \
 LIBEDGETPU_CXXFLAGS := \
 	-fPIC \
 	-Wall \
-	-std=c++14 \
+	-std=c++17 \
 	-DDARWINN_PORT_DEFAULT
 
 LIBEDGETPU_LDFLAGS := \
@@ -59,7 +59,7 @@ LIBEDGETPU_INCLUDES := \
 	$(BUILDDIR)/$(BUILDROOT)
 LIBEDGETPU_INCLUDES := $(addprefix -I,$(LIBEDGETPU_INCLUDES))
 
-LIBEDGETPU_CSRCS := $(TFROOT)/tensorflow/lite/c/common.c
+LIBEDGETPU_CSRCS := $(TFROOT)/tensorflow/lite/c/common_internal.cc
 LIBEDGETPU_COBJS := $(call TOBUILDDIR,$(patsubst %.c,%.o,$(LIBEDGETPU_CSRCS)))
 
 LIBEDGETPU_CCSRCS := \
