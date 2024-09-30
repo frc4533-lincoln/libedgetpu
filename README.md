@@ -77,10 +77,27 @@ Repeat compilation.
 
 If only building for native systems, it is possible to significantly reduce the complexity of the build by removing Bazel (and Docker). This simple approach builds only what is needed, removes build-time depenency fetching, increases the speed, and uses upstream Debian packages.
 
-To prepare your system, you'll need the following packages (both available on Debian Bookworm, Bullseye or Buster-Backports):
+To prepare your system, you'll need the following packages:
 ```
 sudo apt install libabsl-dev libflatbuffers-dev
 ```
+
+For Ubuntu 24.10 or newer you also need:
+```
+sudo apt install libflatbuffers-dev
+```
+For previous versions, you need a newer version of `libflatbuffers-dev` than the one available from the distribution:
+
+```
+git clone https://github.com/google/flatbuffers.git
+cd flatbuffers/
+git checkout v23.5.26
+mkdir build && cd build
+cmake .. -DFLATBUFFERS_BUILD_SHAREDLIB=ON -DFLATBUFFERS_BUILD_TESTS=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr
+make
+sudo make install
+```
+
 
 Next, you'll need to clone the [Tensorflow Repo](https://github.com/tensorflow/tensorflow) at the desired checkout (using TF head isn't advised). If you are planning to use libcoral or pycoral libraries, this should match the ones in those repos' WORKSPACE files. For example, if you are using TF 2.17, we can check that [tag in the TF Repo](https://github.com/tensorflow/tensorflow/tree/r2.15) get the latest commit for that stable release and then checkout that address:
 ```
@@ -88,7 +105,14 @@ git clone https://github.com/tensorflow/tensorflow
 git checkout v2.17.0
 ```
 
-To build the library:
+To build the library for Debian/Ubuntu:
+```
+TFROOT=<path to tensorflow source>/ LD_LIBRARY_PATH=/usr/local/lib/ make -f makefile_build/Makefile  libedgetpu-throttled
+TFROOT=<path to tensorflow source>/ LD_LIBRARY_PATH=/usr/local/lib/ make -f makefile_build/Makefile  libedgetpu-throttled
+debuild -us -uc -tc -b -a amd64 -d
+```
+
+To build the library for MacOS:
 ```
 TFROOT=<Directory of Tensorflow> make -f makefile_build/Makefile -j$(nproc) libedgetpu
 ```
