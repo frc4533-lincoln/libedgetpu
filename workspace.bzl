@@ -54,7 +54,7 @@ load("@bazel_tools//tools/build_defs/repo:utils.bzl", "maybe")
 #TENSORFLOW_SHA256 = "75b8dc9b33afff6f2e2d2e2dacc26dd0973bdcee94eec2af290828c1bc574bdc"
 
 # TF release 2.17.1 as of 10/24/2024.
-ßTENSORFLOW_COMMIT = "3c92ac03cab816044f7b18a86eb86aa01a294d95"
+TENSORFLOW_COMMIT = "3c92ac03cab816044f7b18a86eb86aa01a294d95"
 TENSORFLOW_SHA256 = "317dd95c4830a408b14f3e802698eb68d70d81c7c7cfcd3d28b0ba023fe84a68"
 
 # TF release 2.18.0 as of 10/24/2024.
