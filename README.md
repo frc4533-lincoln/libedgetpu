@@ -61,6 +61,12 @@ $ CPU=armv7a make
 $ CPU=aarch64 make
 ```
 
+Cross-compile for Apple Silicon (arm64), or Intel (x86_64) on MacOS:
+```
+$ CPU=darwin_arm64 make
+$ CPU=darwin_x86_64 make
+```
+
 To package a Debian deb:
 ```
 debuild -us -uc -tc -b
