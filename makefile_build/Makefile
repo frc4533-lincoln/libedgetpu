@@ -32,15 +32,8 @@ LIBEDGETPU_LDFLAGS := \
 	-Wl,--version-script=$(BUILDROOT)/tflite/public/libedgetpu.lds \
 	-fuse-ld=gold \
 	-lflatbuffers \
-	-labsl_flags \
-	-labsl_flags_internal \
-	-labsl_flags_reflection \
-	-labsl_flags_marshalling \
-	-labsl_hash \
-	-labsl_hashtablez_sampler \
-	-labsl_raw_hash_set \
-	-labsl_str_format_internal \
-	-lusb-1.0
+	$(pkgconf --libs --cflags absl_flags) \
+	$(pkgconf --libs --cflags libusb-1.0)
 
 LIBEDGETPU_FLATC_SRCS := \
 	$(BUILDROOT)/executable/executable.fbs \
