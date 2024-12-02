@@ -30,8 +30,8 @@ LIBEDGETPU_LDFLAGS := \
 	-shared \
 	-Wl,--soname,libedgetpu.so.1 \
 	-Wl,--version-script=$(BUILDROOT)/tflite/public/libedgetpu.lds \
-	-fuse-ld=gold \
-	-lflatbuffers \
+	-fuse-ld=mold \
+	$(pkgconf --libs --cflags flatbuffers) \
 	$(pkgconf --libs --cflags absl_flags) \
 	$(pkgconf --libs --cflags libusb-1.0)
 
